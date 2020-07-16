@@ -1,26 +1,18 @@
 function findConsecutiveSums(arr, sum) {
-    let result = [];
-    for (let i = 0; i < arr.length - 1; i++) {
-        let j = i;
-        let tempArr = [arr[j]];
-        let tempSum = arr[j];
-        while (tempSum < sum) {
-            j++;
-            tempSum += arr[j];
-            if (tempSum > sum) {
-                break;
-            }
-            tempArr.push(arr[j]);
-            // console.log(j, tempSum, tempArr);
+    const output = [];
+    for(let i=0; i<arr.length; i++){
+      let current = arr[i];
+      let j=i+1;
+      while(current <= sum){
+        if(current === sum){
+          output.push(arr.slice(i,j));
         }
-        if (tempSum == sum) {
-            // console.log('we pushed to result');
-            result.push(tempArr);
-        }
+        current+=arr[j];
+        j++;
+      }
     }
-    return result;
-}
-
+    return output;
+  }
 console.log(findConsecutiveSums([2, 5, 3, 6, 7, 23, 12], 16));
 // should log [
 //   [2, 5, 3, 6],
